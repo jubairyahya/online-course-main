@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>JUHA Course</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="app">
+    <header>
+      <!-- LEFT SECTION -->
+      <div class="header-left">
+        <button @click="currentPage='home'">Home</button>
+        <button @click="currentPage='admin'">Admin</button>
+
+        <!-- Explore + Search (only on Home page) -->
+        <div v-if="currentPage === 'home'" class="search-container">
+          
+          <input 
+            type="text" 
+            v-model="searchQuery" 
+            placeholder="Search for lessons" 
+            @input="fetchLessons" 
+            class="search-box"
+          />
+        </div>
+      </div>
+
+      <!-- CENTER TITLE -->
+      <h1>JuHa Course</h1>
+
+      <!-- RIGHT SECTION: CART -->
+      <div class="header-right">
+        <div class="cart-wrapper" @click="currentPage='cart'">
+          <img 
+            v-if="currentPage==='home' || currentPage==='cart'" 
+            src="images/cart3.png" 
+            alt="Cart" 
+            class="cart-icon" 
+            :class="{ disabled: cart.length === 0 }"
+          >
+          <span v-if="cart.length > 0" class="cart-count">{{ totalItems }}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+
+      <!-- HOME PAGE -->
+      <div v-if="currentPage==='home'" class="home-page">
+        <select v-model="sortField" @change="sortLessons">
+          <option value="">Sort By</option>
+          <option value="topic">Topic</option>
+          <option value="location">Location</option>
+          <option value="price">Price</option>
+          <option value="space">Spaces</option>
+        </select>
+
+        <select v-model="sortOrder" @change="sortLessons">
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+<div class="page-layout">
+  <!-- Left Column -->
+  <div class="left-column">
+    <h4>About the Course</h4>
+    <p>Gain lifetime access to all our premium lessons and master new skills at your own pace.</p>
+    <ul>
+      <li>Lifetime access to every course</li>
+      <li>24/7 support and guidance</li>
+      <li>Active learner community</li>
+      <li>Weekly live Q&amp;A sessions</li>
+      <li>Certificate upon completion</li>
+    </ul>
+  </div>
+
+  <!-- Center Column (Lessons) -->
+  <div class="center-column">
+    <div class="lessons-container">
+      <div v-for="lesson in lessons" :key="lesson._id" class="lesson-card">
+        <img :src="'http://localhost:5000/images/' + lesson.image" alt="">
+        <h3>{{ lesson.topic }}</h3>
+        <p>{{ lesson.location }}</p>
+        <p>Price: £{{ lesson.price }}</p>
+        <p>Spaces: {{ lesson.space }}</p>
+        <button @click="addToCart(lesson)" :disabled="lesson.space===0">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column -->
+  <div class="right-column">
+    <h4>Highlights</h4>
+     <ul class="cursive-list">
+      <li>Get 30% off all courses today</li>
+      <li>Buy within 24 hours for 70% off top lessons</li>
+      <li>New topics added weekly</li>
+      <li>Flexible schedules for all learners</li>
+    </ul>
+  </div>
+</div>
+
+
+      </div>
+
+      <!-- CART PAGE -->
+      <div v-if="currentPage==='cart'" class="cart-page">
+        <h2>Shopping Cart</h2>
+        <div v-if="cart.length===0">Your cart is empty</div>
+        <div v-else>
+          <div v-for="item in cart" :key="item._id" class="cart-item">
+             
+      <img :src="'http://localhost:5000/images/' + item.image" :alt="item.topic" class="cart-item-image" />
+            <p>{{ item.topic }} - {{ item.quantity }} x £{{ item.price }}</p>
+            <button @click="removeFromCart(item._id)">Remove</button>
+          </div>
+
+          <h3>Total: £{{ totalPrice }}</h3>
+
+          <div class="checkout-box">
+            <h3>Checkout</h3>
+
+            <div class="checkout-row">
+              <input v-model="firstName" placeholder="First Name">
+              <input v-model="lastName" placeholder="Last Name">
+            </div>
+
+            <div class="checkout-row">
+              <input v-model="address" placeholder="Address">
+              <input v-model="city" placeholder="City">
+              <select v-model="country">
+                <option value="">Select Country</option>
+                <option v-for="country in countries" :key="country" :value="country">{{ country }}</option>
+              </select>
+            </div>
+
+            <div class="checkout-row">
+              <input v-model="postcode" placeholder="Postcode">
+              <input v-model="phone" placeholder="Phone Number">
+              <input v-model="email" placeholder="Email">
+            </div>
+
+            <div v-if="paymentMethod === 'card'" class="card-section">
+              <div class="checkout-row">
+                <select v-model="cardType" style="width:200px;">
+                  <option value="">Card Type (auto)</option>
+                  <option value="visa">Visa</option>
+                  <option value="mastercard">Mastercard</option>
+                  <option value="amex">Amex</option>
+                  <option value="discover">Discover</option>
+                  <option value="other">Other</option>
+                </select>
+
+                <input v-model="cardNumber" @input="onCardNumberInput" placeholder="Card Number" maxlength="23" />
+              </div>
+
+              <div class="checkout-row">
+                <input v-model="cardName" placeholder="Name on card">
+                <input v-model="cardExpiry" @input="onExpiryInput" placeholder="MM/YY" maxlength="5" style="width:120px;">
+                <input v-model="cardCVV" @input="onCvvInput" placeholder="CVV" maxlength="4" style="width:100px;">
+              </div>
+
+              <div v-if="cardError" class="error-msg">{{ cardError }}</div>
+            </div>
+
+            <button @click="checkout" :disabled="!validForm">Checkout</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN PAGE -->
+<div v-if="currentPage==='admin'" class="admin-page">
+
+  <!-- Admin Login Box -->
+  <div v-if="!loggedIn" class="admin-box">
+    <h2>Admin Login</h2>
+    <input v-model="username" placeholder="Username">
+    <input type="password" v-model="password" placeholder="Password">
+    <button @click="login">Login</button>
+  </div>
+
+  <!-- Admin Add Lesson Box -->
+ <!-- Admin Dashboard -->
+<div v-else class="admin-dashboard">
+
+  <div class="admin-section">
+    <h3>Add Lesson</h3>
+    <input v-model="topic" placeholder="Topic">
+    <input v-model="location" placeholder="Location">
+    <input type="number" v-model="price" placeholder="Price">
+    <input type="number" v-model="space" placeholder="Spaces">
+    <input type="file" @change="onFileChange">
+    <button @click="addLesson">Add Lesson</button>
+  </div>
+<button class="logout-btn-page" v-if="loggedIn" @click="logout">Logout</button>
+  <hr>
+
+  <div class="admin-section">
+    <h3>All Lessons</h3>
+    <div v-if="lessons.length === 0">No lessons found.</div>
+    <div v-else class="admin-lessons-list">
+      <div v-for="lesson in lessons" :key="lesson._id" class="admin-lesson-item">
+        <img :src="'http://localhost:5000/images/' + lesson.image" alt="" width="80">
+        <div>
+          <strong>{{ lesson.topic }}</strong> - £{{ lesson.price }} ({{ lesson.space }} spaces)
+          <p>{{ lesson.location }}</p>
+        </div>
+        <button @click="editLesson(lesson)">Edit</button>
+        <button @click="deleteLesson(lesson._id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="website.js"></script>
+</body>
+</html>

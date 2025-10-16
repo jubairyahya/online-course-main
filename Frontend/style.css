@@ -1,0 +1,497 @@
+/* ======== RESET & BODY ======== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f2f2f2;
+  background-image: url('images/bg3.jpg');
+  /* path to your image */
+  background-size: cover;
+  /* makes it fill the screen */
+  background-repeat: no-repeat;
+  /* prevents tiling */
+  background-position: center;
+  /* centers the image */
+  background-attachment: fixed;
+  /* keeps it fixed while scrolling */
+  text-align: center;
+}
+
+/* ======== HEADER ======== */
+header {
+  background: #23162f;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* LEFT SECTION: Home + Admin + Explore + Search */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-left button {
+  background: white;
+  color: #24232e;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.header-left button:hover {
+  background: #d4d4d4;
+}
+
+/* Explore text + Search box (only on Home) */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+
+
+.search-box {
+  padding: 0.5rem 0.5rem 0.5rem 1.8rem;
+  border-radius: 5px;
+  border: none;
+  width: 200px;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='gray' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85zm-5.242 1.41a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 6px center;
+  background-size: 16px 16px;
+}
+
+
+/* CENTER: Page title */
+header h1 {
+  margin: 0;
+  font-size: 4rem;
+  font-style: oblique;
+  font-family: "Brush Script MT", "Lucida Handwriting", cursive;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* RIGHT SECTION: Cart */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.cart-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.cart-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ======== GENERAL BUTTONS ======== */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ======== CONTAINER ======== */
+.container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ======== HOME PAGE ======== */
+.search-sort {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.search-sort input,
+.search-sort select {
+  padding: 0.5rem;
+  width: 180px;
+  text-align: center;
+}
+/* Page layout */
+.page-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 2rem auto;
+  width: 90%;
+  gap: 1.5rem;
+}
+
+/* Left Column: clean readable font */
+.left-column {
+  width: 20%;
+  background-color: #f8f8ff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif; /* clean readable font */
+}
+
+.left-column h4 {
+  color: #3a1f6e;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+.left-column ul {
+  list-style-type: circle;
+  padding-left: 1.2rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.left-column p {
+  font-size: 1rem;
+  color: #4a3c68;
+  margin-bottom: 0.8rem;
+}
+
+/* Right Column: offer/highlights */
+.right-column {
+  width: 20%;
+  background-color: #f8f8ff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif; /* main font */
+}
+
+.right-column h4 {
+  color: #3a1f6e;
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 0.8rem;
+}
+
+/* Only the offer list in cursive */
+.right-column .cursive-list {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+  font-family: 'Dancing Script', cursive; /* cursive font for offers */
+  font-size: 1.5rem;
+  color: #b10822;
+  line-height: 1.6;
+}
+
+/* Center Column (lessons) remains the same */
+.center-column {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.lessons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.lesson-card {
+  background: white;
+  padding: 1rem;
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.lesson-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.lesson-card button {
+  background-color: #23162f;
+  color: white;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  width: 100%;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.lesson-card button:hover {
+  background-color: #060116;
+}
+
+
+/* ======== CART PAGE ======== */
+.cart-page input {
+  width: 200px;
+  padding: 0.5rem;
+  margin: 0.3rem auto;
+  text-align: center;
+}
+
+.cart-page button {
+  margin: 0.5rem 0;
+}
+
+.cart-item-image {
+  width: 120px;
+  /* desired width */
+  height: 80px;
+  /* desired height */
+  object-fit: cover;
+  /* maintain aspect ratio and crop if needed */
+  border-radius: 5px;
+  /* optional, for a nicer look */
+}
+
+/* ======== CHECKOUT BOX ======== */
+.checkout-box {
+  background: white;
+  padding: 1rem 2rem;
+  margin-top: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 0.5rem;
+}
+
+.checkout-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.checkout-row input {
+  flex: 1 1 140px;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.checkout-row select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  flex: 1;
+  background-color: #fff;
+}
+
+.checkout-box button {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  background-color: #23162f;
+  color: white;
+  cursor: pointer;
+}
+
+.checkout-box button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.card-section input,
+.card-section select {
+  width: 200px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+.error-msg {
+  color: #c0392b;
+  margin-top: 0.25rem;
+}
+
+/* ======== ADMIN PAGE ======== */
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-login input,
+.admin-login button {
+  width: 200px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+/* ------------------------ Admin Page ------------------------ */
+.admin-box {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-box input,
+.admin-box select,
+.admin-box button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.admin-box button {
+  background-color: #251450;
+  color: white;
+  cursor: pointer;
+}
+
+.admin-box button:hover {
+  background-color: #060116;
+}
+/* ======== Admin Lessons Display ======== */
+.admin-lessons {
+  margin-top: 30px;
+  width: 90%;
+  max-width: 900px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.admin-lesson-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 250px;
+  text-align: center;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-lesson-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.admin-lesson-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.admin-lesson-card h3 {
+  font-size: 1.1rem;
+  margin: 10px 0 5px;
+  color: #251450;
+}
+
+.admin-lesson-card p {
+  margin: 2px 0;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.admin-lesson-card button {
+  background-color: #251450;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.admin-lesson-card button:hover {
+  background-color: #060116;
+}
+
+
+.logout-btn-page {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #ffffff;
+  color: rgb(34, 30, 30);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.logout-btn-page:hover {
+  background-color: #aba9ad;
+}
+
+.admin-add-lesson input,
+.admin-add-lesson button {
+  width: 200px;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  text-align: center;
+}
+
+/* General Inputs & Buttons */
+input,
+select,
+button {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
