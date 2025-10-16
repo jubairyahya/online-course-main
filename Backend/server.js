@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 // -------------------- MongoDB Connection --------------------
-const uri = 'mongodb://localhost:27017';
+const uri = 'mongodb+srv://admin_jubair:admin1234@jubair.vrzmiwa.mongodb.net/';
 const client = new MongoClient(uri);
 
 let lessonsCollection;
