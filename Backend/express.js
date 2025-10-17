@@ -2,17 +2,26 @@ const express = require('express');
 require('dotenv').config();
 const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
+
 const cors = require('cors');
 const multer = require('multer');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // -------------------- Middleware --------------------
 app.use(cors());
 app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
+// Serve static frontend files (CSS, JS, etc.)
+const frontendPath = path.join(__dirname, '../Frontend');
+app.use(express.static(frontendPath));
+
+// Serve index.html on root route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
 // Logger
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - Body:`, req.body);
