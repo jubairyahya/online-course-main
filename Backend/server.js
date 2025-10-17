@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
 const cors = require('cors');
@@ -19,7 +20,12 @@ app.use((req, res, next) => {
 });
 
 // -------------------- MongoDB Connection --------------------
-const uri = 'mongodb+srv://admin_jubair:admin1234@jubair.vrzmiwa.mongodb.net/';
+const user = encodeURIComponent(process.env.DB_USER);
+const pass = encodeURIComponent(process.env.DB_PASS);
+const cluster = process.env.DB_CLUSTER;
+const dbName = process.env.DB_NAME;
+
+const uri = `mongodb+srv://${user}:${pass}@${cluster}/${dbName}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri);
 
 let lessonsCollection;
