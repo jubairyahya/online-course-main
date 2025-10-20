@@ -19,8 +19,8 @@ createApp({
     // Lesson form (admin)
     const topic = ref('');
     const location = ref('');
-    const price = ref(0);
-    const space = ref(0);
+    const price = ref(null);
+    const space = ref(null);
     const imageFile = ref(null);
 
     // Checkout form
@@ -386,8 +386,8 @@ createApp({
         //  Clear input fields
         topic.value = '';
         location.value = '';
-        price.value = '';
-        space.value = '';
+        price.value = null;
+        space.value = null;
         imageFile.value = null;
 
         await fetchLessons();

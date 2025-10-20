@@ -198,12 +198,14 @@
 
   <div class="admin-section">
     <h3>Add Lesson</h3>
-    <input v-model="topic" placeholder="Topic">
-    <input v-model="location" placeholder="Location">
-    <input type="number" v-model="price" placeholder="Price">
-    <input type="number" v-model="space" placeholder="Spaces">
+  <div class="admin-add-card">
+    <input v-model="topic" placeholder="Enter Topic">
+    <input v-model="location" placeholder="Enter Location">
+    <input type="number" v-model="price" placeholder="Enter Price">
+    <input type="number" v-model="space" placeholder="Enter Spaces">
     <input type="file" @change="onFileChange">
     <button @click="addLesson">Add Lesson</button>
+  </div>
   </div>
 <button class="logout-btn-page" v-if="loggedIn" @click="logout">Logout</button>
   <hr>
