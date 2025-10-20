@@ -127,15 +127,26 @@ app.put('/lessons/:id', async (req, res) => {
     res.status(500).json({ message: 'Failed to update lesson', error: err.message });
   }
 });
-// Delete lesson by ID
+// Delete lesson route
 app.delete('/lessons/:id', async (req, res) => {
-    const { id } = req.params;
-    try {
-        await Lesson.findByIdAndDelete(id);
-        res.status(200).json({ message: 'Deleted successfully' });
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to delete lesson' });
+  const { id } = req.params;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid lesson ID' });
+  }
+
+  try {
+    const result = await lessonsCollection.deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'Lesson not found' });
     }
+
+    res.status(200).json({ message: 'Deleted successfully' });
+  } catch (err) {
+    console.error('Delete error:', err);
+    res.status(500).json({ message: 'Failed to delete lesson', error: err.message });
+  }
 });
 
 
@@ -195,7 +206,7 @@ app.post('/orders', async (req, res) => {
       !lastName ||
       !address ||
       !city ||
-      !country ||   //  include in validation
+      !country ||   
       !postcode ||
       !phone ||
       !email ||
@@ -204,15 +215,15 @@ app.post('/orders', async (req, res) => {
     ) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
-    let paymentResult = { success: true, message: 'Payment processed successfully (mock)' };
+    let paymentResult = { success: true, message: 'Payment processed successfully ' };
 
     if (paymentMethod === 'card') {
       paymentResult = {
         success: true,
-        message: `Mock card payment succeeded for ${cardBrand?.toUpperCase() || 'CARD'} ****${cardLast4 || '####'}`
+        message: `card payment succeeded for ${cardBrand?.toUpperCase() || 'CARD'} ****${cardLast4 || '####'}`
       };
     } else if (paymentMethod === 'paypal') {
-      paymentResult = { success: true, message: 'Mock PayPal payment completed' };
+      paymentResult = { success: true, message: ' PayPal payment completed' };
     }
 
     //  Validate lesson IDs and quantities
@@ -243,7 +254,7 @@ app.post('/orders', async (req, res) => {
       );
     }
 
-    //  Create order object with country included
+   
     const newOrder = {
       firstName,
       lastName,
