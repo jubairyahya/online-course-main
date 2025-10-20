@@ -18,6 +18,9 @@ body {
 
 /* ======== HEADER ======== */
 header {
+  position: sticky;
+  top: 0;  
+  z-index:1000;          
   background: #23162f;
   color: white;
   padding: 1rem 2rem;
@@ -128,6 +131,14 @@ button:disabled {
 
 /* ======== HOME PAGE ======== */
 .search-sort {
+  position: fixed;
+  top: 110px;
+  left:22%;
+  right: 22%;
+  z-index: 950;
+  padding: 0.7rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -149,10 +160,15 @@ button:disabled {
   margin: 2rem auto;
   width: 90%;
   gap: 1.5rem;
+  position: relative;
 }
 
-/* Left Column: clean readable font */
+/* Left Column */
 .left-column {
+  position: fixed;
+  top: 110px;  
+  left: 0;
+  z-index:1000;  
   width: 20%;
   background-color: #f8f8ff;
   padding: 1rem;
@@ -182,6 +198,10 @@ button:disabled {
 
 /* Right Column: offer/highlights */
 .right-column {
+  position: fixed;
+  top: 110px;  
+  right:0;
+  z-index:1000;  
   width: 20%;
   background-color: #f8f8ff;
   padding: 2rem;
@@ -212,6 +232,9 @@ button:disabled {
   flex: 1;
   display: flex;
   justify-content: center;
+  margin-left: 22%;
+  margin-right: 22%;
+  margin-top: 80px;
 }
 
 .lessons-container {

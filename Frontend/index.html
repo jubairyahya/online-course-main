@@ -48,24 +48,29 @@
         </div>
       </div>
     </header>
+   
 
     <!-- MAIN CONTAINER -->
     <div class="container">
 
       <!-- HOME PAGE -->
       <div v-if="currentPage==='home'" class="home-page">
-        <select v-model="sortField" @change="sortLessons">
-          <option value="">Sort By</option>
-          <option value="topic">Topic</option>
-          <option value="location">Location</option>
-          <option value="price">Price</option>
-          <option value="space">Spaces</option>
-        </select>
+         <!-- Sort/Search Fixed Bar -->
+<div class="search-sort">
+  <select v-model="sortField" @change="sortLessons">
+    <option value="">Sort By</option>
+    <option value="topic">Topic</option>
+    <option value="location">Location</option>
+    <option value="price">Price</option>
+    <option value="space">Spaces</option>
+  </select>
 
-        <select v-model="sortOrder" @change="sortLessons">
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+  <select v-model="sortOrder" @change="sortLessons">
+    <option value="asc">Ascending</option>
+    <option value="desc">Descending</option>
+  </select>
+</div>
+
 <div class="page-layout">
   <!-- Left Column -->
   <div class="left-column">
