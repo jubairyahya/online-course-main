@@ -6,7 +6,7 @@
   <title>JUHA Course</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;600&family=Pacifico&display=swap" rel="stylesheet">
+  
 
 </head>
 
@@ -55,7 +55,7 @@
 
       <!-- HOME PAGE -->
       <div v-if="currentPage==='home'" class="home-page">
-         <!-- Sort/Search Fixed Bar -->
+         <!-- Sort/Search  Bar -->
 <div class="search-sort">
   <select v-model="sortField" @change="sortLessons">
     <option value="">Sort By</option>
@@ -227,7 +227,9 @@
   </div>
 </div>
 
-
+</div>
+    </div>
+  </div>
   <script src="vue.js"></script>
 </body>
 </html>

@@ -1,10 +1,10 @@
-/* ======== RESET & BODY ======== */
+/* BODY */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #f2f2f2;
   background-image: url('images/bg3.jpg');
-  /* path to your image */
+  
   background-size: cover;
   /* makes it fill the screen */
   background-repeat: no-repeat;
@@ -16,7 +16,7 @@ body {
   text-align: center;
 }
 
-/* ======== HEADER ======== */
+/* HEADER  */
 header {
   position: sticky;
   top: 0;  
@@ -29,7 +29,7 @@ header {
   justify-content: space-between;
 }
 
-/* LEFT SECTION: Home + Admin + Explore + Search */
+/* LEFT SECTION*/
 .header-left {
   display: flex;
   align-items: center;
@@ -49,7 +49,7 @@ header {
   background: #d4d4d4;
 }
 
-/* Explore text + Search box (only on Home) */
+/* Search box  */
 .search-container {
   display: flex;
   align-items: center;
