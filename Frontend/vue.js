@@ -70,7 +70,7 @@ createApp({
     const cardCVV = ref('');
     const cardError = ref('');
 
-    // ----------------- Computed -----------------
+    // Computed 
     const totalItems = computed(() =>
       cart.value.reduce((sum, i) => sum + i.quantity, 0)
     );
@@ -89,19 +89,7 @@ createApp({
         /^[0-9]+$/.test(phone.value) &&
         country.value.trim().length > 0
       );
-      if (paymentMethod.value === 'paypal') {
-        // For PayPal we can require an email
-        return basic && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
-      }
-
-      // Card payment validation
-      const rawCardDigits = (cardNumber.value || '').replace(/\D/g, '');
-      const cardOk = rawCardDigits.length >= 13 && rawCardDigits.length <= 19 && luhnCheck(rawCardDigits);
-      const nameOk = cardName.value.trim().length > 0;
-      const expiryOk = validateExpiry(cardExpiry.value);
-      const cvvOk = /^[0-9]{3,4}$/.test(cardCVV.value);
-
-      return basic && cardOk && nameOk && expiryOk && cvvOk;
+      
     });
 
 

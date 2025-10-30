@@ -6,7 +6,7 @@
   <title>JUHA Course</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
-  
+
 
 </head>
 
@@ -20,14 +20,9 @@
 
         <!-- Explore + Search (only on Home page) -->
         <div v-if="currentPage === 'home'" class="search-container">
-          
-          <input 
-            type="text" 
-            v-model="searchQuery" 
-            placeholder="Search for lessons" 
-            @input="fetchLessons" 
-            class="search-box"
-          />
+
+          <input type="text" v-model="searchQuery" placeholder="Search for lessons" @input="fetchLessons"
+            class="search-box" />
         </div>
       </div>
 
@@ -37,81 +32,76 @@
       <!-- RIGHT SECTION: CART -->
       <div class="header-right">
         <div class="cart-wrapper" @click="currentPage='cart'">
-          <img 
-            v-if="currentPage==='home' || currentPage==='cart'" 
-            src="images/cart3.png" 
-            alt="Cart" 
-            class="cart-icon" 
-            :class="{ disabled: cart.length === 0 }"
-          >
+          <img v-if="currentPage==='home' || currentPage==='cart'" src="images/cart3.png" alt="Cart" class="cart-icon"
+            :class="{ disabled: cart.length === 0 }">
           <span v-if="cart.length > 0" class="cart-count">{{ totalItems }}</span>
         </div>
       </div>
     </header>
-   
+
 
     <!-- MAIN CONTAINER -->
     <div class="container">
 
       <!-- HOME PAGE -->
       <div v-if="currentPage==='home'" class="home-page">
-         <!-- Sort/Search  Bar -->
-<div class="search-sort">
-  <select v-model="sortField" @change="sortLessons">
-    <option value="">Sort By</option>
-    <option value="topic">Topic</option>
-    <option value="location">Location</option>
-    <option value="price">Price</option>
-    <option value="space">Spaces</option>
-  </select>
+        <!-- Sort/Search  Bar -->
+        <div class="search-sort">
+          <select v-model="sortField" @change="sortLessons">
+            <option value="">Sort By</option>
+            <option value="topic">Topic</option>
+            <option value="location">Location</option>
+            <option value="price">Price</option>
+            <option value="space">Spaces</option>
+          </select>
 
-  <select v-model="sortOrder" @change="sortLessons">
-    <option value="asc">Ascending</option>
-    <option value="desc">Descending</option>
-  </select>
-</div>
+          <select v-model="sortOrder" @change="sortLessons">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+          </select>
+        </div>
 
-<div class="page-layout">
-  <!-- Left Column -->
-  <div class="left-column">
-    <h4>About the Course</h4>
-    <p>Gain lifetime access to all our premium lessons and master new skills at your own pace.</p>
-    <ul>
-      <li>Lifetime access to every course</li>
-      <li>24/7 support and guidance</li>
-      <li>Active learner community</li>
-      <li>Weekly live Q&amp;A sessions</li>
-      <li>Certificate upon completion</li>
-    </ul>
-  </div>
+        <div class="page-layout">
+          <!-- Left Column -->
+          <div class="left-column">
+            <h4>About the Course</h4>
+            <p>Gain lifetime access to all our premium lessons and master new skills at your own pace.</p>
+            <ul>
+              <li>Lifetime access to every course</li>
+              <li>24/7 support and guidance</li>
+              <li>Active learner community</li>
+              <li>Weekly live Q&amp;A sessions</li>
+              <li>Certificate upon completion</li>
+            </ul>
+          </div>
 
-  <!-- Center Column (Lessons) -->
-  <div class="center-column">
-    <div class="lessons-container">
-      <div v-for="lesson in lessons" :key="lesson._id" class="lesson-card">
-        <img :src="'http://localhost:5000/images/' + lesson.image" alt="">
-        <h3>{{ lesson.topic }}</h3>
-        <p>{{ lesson.location }}</p>
-        <p>Price: £{{ lesson.price }}</p>
-        <p>Spaces: {{ lesson.space }}</p>
-        <button @click="addToCart(lesson)" :disabled="lesson.space===0">
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  </div>
+          <!-- Center Column (Lessons) -->
+          <div class="center-column">
+            <div class="lessons-container">
+              <div v-for="lesson in lessons" :key="lesson._id" class="lesson-card">
+                <img :src="'http://localhost:5000/images/' + lesson.image" alt="">
+                <h3>{{ lesson.topic }}</h3>
+                <p>{{ lesson.location }}</p>
+                <p>Price: £{{ lesson.price }}</p>
+                <p>Spaces: {{ lesson.space }}</p>
+                <button @click="addToCart(lesson)" :disabled="lesson.space===0">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
 
-  <!-- Right Column -->
-  <div class="right-column">
-    <h4>Highlights</h4>
-     <ul class="cursive-list">
-      <li>Get 30% off all courses today</li>
-      <li>Buy within 24 hours for 70% off top lessons</li>
-      <li>New topics added weekly</li>
-      <li>Flexible schedules for all learners</li>
-    </ul>
-  </div>
-</div>
+          <!-- Right Column -->
+          <div class="right-column">
+            <h4>Highlights</h4>
+            <ul class="cursive-list">
+              <li>Get 30% off all courses today</li>
+              <li>Buy within 24 hours for 70% off top lessons</li>
+              <li>New topics added weekly</li>
+              <li>Flexible schedules for all learners</li>
+            </ul>
+          </div>
+        </div>
 
 
       </div>
@@ -122,8 +112,8 @@
         <div v-if="cart.length===0">Your cart is empty</div>
         <div v-else>
           <div v-for="item in cart" :key="item._id" class="cart-item">
-             
-      <img :src="'http://localhost:5000/images/' + item.image" :alt="item.topic" class="cart-item-image" />
+
+            <img :src="'http://localhost:5000/images/' + item.image" :alt="item.topic" class="cart-item-image" />
             <p>{{ item.topic }} - {{ item.quantity }} x £{{ item.price }}</p>
             <button @click="removeFromCart(item._id)">Remove</button>
           </div>
@@ -169,7 +159,8 @@
 
               <div class="checkout-row">
                 <input v-model="cardName" placeholder="Name on card">
-                <input v-model="cardExpiry" @input="onExpiryInput" placeholder="MM/YY" maxlength="5" style="width:120px;">
+                <input v-model="cardExpiry" @input="onExpiryInput" placeholder="MM/YY" maxlength="5"
+                  style="width:120px;">
                 <input v-model="cardCVV" @input="onCvvInput" placeholder="CVV" maxlength="4" style="width:100px;">
               </div>
 
@@ -182,54 +173,56 @@
       </div>
 
       <!-- ADMIN PAGE -->
-<div v-if="currentPage==='admin'" class="admin-page">
+      <div v-if="currentPage==='admin'" class="admin-page">
 
-  <!-- Admin Login Box -->
-  <div v-if="!loggedIn" class="admin-box">
-    <h2>Admin Login</h2>
-    <input v-model="username" placeholder="Username">
-    <input type="password" v-model="password" placeholder="Password">
-    <button @click="login">Login</button>
-  </div>
-
-  <!-- Admin Add Lesson Box -->
- <!-- Admin Dashboard -->
-<div v-else class="admin-dashboard">
-
-  <div class="admin-section">
-    <h3>Add Lesson</h3>
-  <div class="admin-add-card">
-    <input v-model="topic" placeholder="Enter Topic">
-    <input v-model="location" placeholder="Enter Location">
-    <input type="number" v-model="price" placeholder="Enter Price">
-    <input type="number" v-model="space" placeholder="Enter Spaces">
-    <input type="file" @change="onFileChange">
-    <button @click="addLesson">Add Lesson</button>
-  </div>
-  </div>
-<button class="logout-btn-page" v-if="loggedIn" @click="logout">Logout</button>
-  <hr>
-
-  <div class="admin-section">
-    <h3>All Lessons</h3>
-    <div v-if="lessons.length === 0">No lessons found.</div>
-    <div v-else class="admin-lessons-list">
-      <div v-for="lesson in lessons" :key="lesson._id" class="admin-lesson-item">
-        <img :src="'http://localhost:5000/images/' + lesson.image" alt="" width="80">
-        <div>
-          <strong>{{ lesson.topic }}</strong> - £{{ lesson.price }} ({{ lesson.space }} spaces)
-          <p>{{ lesson.location }}</p>
+        <!-- Admin Login Box -->
+        <div v-if="!loggedIn" class="admin-box">
+          <h2>Admin Login</h2>
+          <input v-model="username" placeholder="Username">
+          <input type="password" v-model="password" placeholder="Password">
+          <button @click="login">Login</button>
         </div>
-        <button @click="editLesson(lesson)">Edit</button>
-        <button @click="deleteLesson(lesson._id)">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
 
-</div>
+        <!-- Admin Add Lesson Box -->
+        <!-- Admin Dashboard -->
+        <div v-else class="admin-dashboard">
+
+          <div class="admin-section">
+            <h3>Add Lesson</h3>
+            <div class="admin-add-card">
+              <input v-model="topic" placeholder="Enter Topic">
+              <input v-model="location" placeholder="Enter Location">
+              <input type="number" v-model="price" placeholder="Enter Price">
+              <input type="number" v-model="space" placeholder="Enter Spaces">
+              <input type="file" @change="onFileChange">
+              <button @click="addLesson">Add Lesson</button>
+            </div>
+          </div>
+          <button class="logout-btn-page" v-if="loggedIn" @click="logout">Logout</button>
+          <hr>
+
+          <div class="admin-section">
+            <h3>All Lessons</h3>
+            <div v-if="lessons.length === 0">No lessons found.</div>
+            <div v-else class="admin-lessons-list">
+              <div v-for="lesson in lessons" :key="lesson._id" class="admin-lesson-item">
+                <img :src="'http://localhost:5000/images/' + lesson.image" alt="" width="80">
+                <div>
+                  <strong>{{ lesson.topic }}</strong> - £{{ lesson.price }} ({{ lesson.space }} spaces)
+                  <p>{{ lesson.location }}</p>
+                </div>
+                <button @click="editLesson(lesson)">Edit</button>
+                <button @click="deleteLesson(lesson._id)">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+
     </div>
   </div>
+  
   <script src="vue.js"></script>
 </body>
+
 </html>

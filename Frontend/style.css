@@ -276,7 +276,7 @@ button:disabled {
 }
 
 
-/* ======== CART PAGE ======== */
+/*  CART PAGE  */
 .cart-page input {
   width: 200px;
   padding: 0.5rem;
@@ -299,7 +299,7 @@ button:disabled {
   /* optional, for a nicer look */
 }
 
-/* ======== CHECKOUT BOX ======== */
+/*  CHECKOUT BOX  */
 .checkout-box {
   background: white;
   padding: 1rem 2rem;
@@ -389,7 +389,7 @@ button:disabled {
   text-align: center;
 }
 
-/* ------------------------ Admin Page ------------------------ */
+/*  Admin Page  */
 .admin-box {
   border: 1px solid #ccc;
   padding: 20px;
@@ -453,7 +453,7 @@ button:disabled {
 .admin-box button:hover {
   background-color: #060116;
 }
-/* ======== Admin Lessons Display ======== */
+/* Admin Lessons Display  */
 .admin-lessons {
   margin-top: 30px;
   width: 90%;
